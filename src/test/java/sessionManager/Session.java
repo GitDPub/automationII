@@ -25,6 +25,10 @@ public class Session {
         session=null;
     }
 
+    public void GoBack() {
+        driver.navigate().back();
+    }
+
     public AppiumDriver getDriver() {
         return driver;
     }

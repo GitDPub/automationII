@@ -15,8 +15,8 @@ public class Android implements IDevice {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", "Dieter GN3");
         capabilities.setCapability("platformVersion", "5.0");
-        capabilities.setCapability("appPackage", "com.locus.scientificcalculator");
-        capabilities.setCapability("appActivity", "com.lans.scientificcalc.ScientificActivity");
+        capabilities.setCapability("appPackage", "com.simplemanage.contactsapp");
+        capabilities.setCapability("appActivity", "com.simplemanage.contactsapp.mvp.view.ContactsActivity");
         capabilities.setCapability("platformName", "Android");
 
         AppiumDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
