@@ -1,0 +1,37 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.5"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'io.qameta.allure'
+
+group 'vulnerabilityjava'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '4.3.1'
+    compile group: 'io.rest-assured', name: 'json-path', version: '4.3.1'
+    compile group: 'io.rest-assured', name: 'json-schema-validator', version: '4.3.1'
+    compile group: 'io.rest-assured', name: 'rest-assured-common', version: '4.3.1'
+    compile group: 'io.rest-assured', name: 'rest-assured-all', version: '4.3.1'
+    testCompile group: 'io.qameta.allure', name: 'allure-junit4', version: '2.13.5'
+}
+
+allure {
+    autoconfigure = true
+    version = '2.6.0'
+    aspectjweaver = true
+}
