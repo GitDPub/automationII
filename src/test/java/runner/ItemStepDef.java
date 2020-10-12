@@ -7,10 +7,12 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import helpers.BasicAuthHelper;
 import helpers.JsonHelper;
 import org.json.JSONException;
 import org.junit.Assert;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,18 +23,27 @@ public class ItemStepDef {
 
     ResponseInformation response = new ResponseInformation();
     Map<String,String> variables= new HashMap<>();
+    String TokenString = "";
 
     @Given("^I have an authentication to todo\\.ly$")
     public void iHaveAnAuthenticationToTodoLy() {
     }
 
-    @When("^I send (POST|PUT|DELETE|GET) request '(.*)' with json$")
-    public void iSendPOSTRequestApiItemsJsonWithJson(String method,String url, String jsonBody) {
+    @When("^I send (POST|PUT|DELETE|GET) request '(.*)' using (BASIC|TOKEN) auth with json$")
+    public void iSendPOSTRequestApiItemsJsonWithJson(String method,String url,String authType, String jsonBody) {
         RequestInformation request = new RequestInformation();
         request.setUrl(HOST+this.replaceVariables(url));
         request.setBody(this.replaceVariables(jsonBody));
-        request.addHeaders(BASIC_AUTHENTICATION_HEADER,BASIC_AUTHENTICATION);
 
+//        String userCredential = USER_EMAIL + ":" + USER_PASSWORD;
+//        String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userCredential.getBytes()));
+
+        if(authType.equals("BASIC")) {
+            request.addHeaders(BASIC_AUTHENTICATION_HEADER, BasicAuthHelper.GenerateAuth(USER_EMAIL, USER_PASSWORD));
+        }
+        else if(authType.equals("TOKEN")) {
+            request.addHeaders(TOKEN_AUTHENTICATION_HEADER, variables.get("USER_TOKEN"));
+        }
         response= FactoryRequest.make(method.toLowerCase()).send(request);
     }
 
@@ -62,4 +73,5 @@ public class ItemStepDef {
         }
         return value;
     }
+
 }
