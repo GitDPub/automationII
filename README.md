@@ -9,7 +9,7 @@ $ git checkout seccion1a
 ```
 ### Seccion1 b - 5 flujos con app menjo de contactos
 ```sh
-$ git checkout seccion1a
+$ git checkout seccion1b
 ```
 ### Seccion 2 - Rest test con autenticacion basica y por token
 ```sh
