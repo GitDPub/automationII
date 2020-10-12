@@ -1,5 +1,5 @@
 # automationII
-# Lista de trabajos practicos
+# Lista de secciones del examen
 ## Dieter Portanda
 
 
